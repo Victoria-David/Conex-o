@@ -1,0 +1,361 @@
+:root {
+  --card-width: 200px;
+  --card-height: 293px;
+  --card-border-radius: 15px;
+  --gold-color: #d4af37;
+  --purple-color: #6a0dad;
+  --purple-glow: rgba(106, 13, 173, 0.8);
+  --red-glow: rgba(173, 13, 13, 0.8);
+  --blue-glow: rgba(13, 73, 173, 0.8);
+  --white-glow: rgba(200, 200, 200, 0.8);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* PS1-themed background */
+ background-image: url(https://wallpaperaccess.com/full/299965.png);
+  font-family: 'Arial', sans-serif;
+  perspective: absolute;
+  overflow: show;
+  position: center;
+}
+
+/* PS1 Background Elements */
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 60% 30%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 300px 300px;
+  background-position: 0 0;
+  z-index: -2;
+}
+
+/* PS1 Logo */
+body::after {
+  content: "";
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 100px;
+  height: 100px;
+  background-image: url(https://wallpaperaccess.com/full/299965.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+/* Carousel Container */
+.carousel-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cards-container {
+  position: relative;
+  width: var(--card-width);
+  height: var(--card-height);
+}
+
+.nav-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.card-container {
+  width: var(--card-width);
+  height: var(--card-height);
+  position: absolute;
+  cursor: pointer;
+  /* Enhanced drop shadow */
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card-container.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.card-container.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--card-border-radius);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.card-back {
+  /* Card back image */
+  background-image: url('https://assets.codepen.io/13223981/back-card.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+}
+
+.card-front.dark-magician {
+  background-image: url(https://i.pinimg.com/originals/6d/69/b9/6d69b9baffbd283dcc62ddc716962b43.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card-front.skull {
+  background-image: url(https://i.pinimg.com/736x/47/7d/4b/477d4b898f0d5d3c32e7c7dcc82fe655.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card-front.blue-eyes {
+  background-image: url(https://pm1.narvii.com/6659/4edd96316186dcf6302da3098769e416d5119247_hq.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card-front.servant {
+  background-image: url(https://tse4.mm.bing.net/th/id/OIP.VHRn4hFCG5gOVzhbhygjHwHaJp?rs=1&pid=ImgDetMain&o=7&rm=3);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* Card name display */
+.card-name {
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card-container.active .card-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Magic Effects */
+.magic-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.particle {
+  position: absolute;
+  background-color: var(--purple-color);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.red-particle {
+  background-color: #a00;
+}
+
+.blue-particle {
+  background-color: #00a;
+}
+
+.white-particle {
+  background-color: #ddd;
+}
+
+.card-container:hover .magic-particles {
+  opacity: 1;
+}
+
+/* Enhanced magic glow - Fixed to appear on the card */
+.magic-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--card-border-radius);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Default (purple) glow */
+.card-container:hover .magic-glow {
+  opacity: 1;
+  box-shadow: 
+    0 0 25px var(--purple-glow),
+    0 0 50px rgba(106, 13, 173, 0.4),
+    0 0 75px rgba(106, 13, 173, 0.2);
+}
+
+/* Red glow */
+.card-container:hover .red-glow {
+  box-shadow: 
+    0 0 25px var(--red-glow),
+    0 0 50px rgba(173, 13, 13, 0.4),
+    0 0 75px rgba(173, 13, 13, 0.2);
+}
+
+/* Blue glow */
+.card-container:hover .blue-glow {
+  box-shadow: 
+    0 0 25px var(--blue-glow),
+    0 0 50px rgba(13, 73, 173, 0.4),
+    0 0 75px rgba(13, 73, 173, 0.2);
+}
+
+/* White glow */
+.card-container:hover .white-glow {
+  box-shadow: 
+    0 0 25px var(--white-glow),
+    0 0 50px rgba(200, 200, 200, 0.4),
+    0 0 75px rgba(200, 200, 200, 0.2);
+}
+
+/* Enhanced glow when activated */
+.card-container.activated .magic-glow {
+  opacity: 1;
+}
+
+/* Purple glow activated */
+.card-container.activated .magic-glow:not(.red-glow):not(.blue-glow):not(.white-glow) {
+  box-shadow: 
+    0 0 30px var(--purple-glow),
+    0 0 60px rgba(106, 13, 173, 0.6),
+    0 0 90px rgba(106, 13, 173, 0.3);
+}
+
+/* Red glow activated */
+.card-container.activated .red-glow {
+  box-shadow: 
+    0 0 30px var(--red-glow),
+    0 0 60px rgba(173, 13, 13, 0.6),
+    0 0 90px rgba(173, 13, 13, 0.3);
+}
+
+/* Blue glow activated */
+.card-container.activated .blue-glow {
+  box-shadow: 
+    0 0 30px var(--blue-glow),
+    0 0 60px rgba(13, 73, 173, 0.6),
+    0 0 90px rgba(13, 73, 173, 0.3);
+}
+
+/* White glow activated */
+.card-container.activated .white-glow {
+  box-shadow: 
+    0 0 30px var(--white-glow),
+    0 0 60px rgba(200, 200, 200, 0.6),
+    0 0 90px rgba(200, 200, 200, 0.3);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Floating animation when card is clicked */
+.card-container.activated .card-inner {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Particle animations */
+@keyframes particle-fade {
+  0% { opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+@keyframes particle-move {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-100px) translateX(20px); }
+}
+
+/* PS1 Loading Text */
+.ps1-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  opacity: 0.7;
+  text-shadow: 0 0 5px #fff;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+.card-info {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  opacity: 0.7;
+  text-shadow: 0 0 5px #fff;
+  text-align: center;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.3; }
+}
