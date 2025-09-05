@@ -16,7 +16,7 @@ body {
   align-items: center;
   min-height: 100vh;
   /* PS1-themed background */
- background-image: url(https://wallpaperaccess.com/full/299965.png);
+ background-image: url(	https://wallpaperaccess.com/full/299965.png);
   font-family: 'Arial', sans-serif;
   perspective: absolute;
   overflow: show;
@@ -128,7 +128,7 @@ body::after {
 
 .card-back {
   /* Card back image */
-  background-image: url('https://assets.codepen.io/13223981/back-card.png');
+  background-image: url(https://www.quadrorama.com.br/wp-content/uploads/2018/02/quadro-decorativo-poster-Until-Dawn-01.png);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -139,33 +139,46 @@ body::after {
 }
 
 .card-front.dark-magician {
-  background-image: url(https://i.pinimg.com/originals/6d/69/b9/6d69b9baffbd283dcc62ddc716962b43.jpg);
+  background-image: url(https://i.pinimg.com/originals/8e/5d/a7/8e5da72d429becce965b92f9d8acc2cf.png);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .card-front.skull {
-  background-image: url(https://i.pinimg.com/736x/47/7d/4b/477d4b898f0d5d3c32e7c7dcc82fe655.jpg);
+  background-image: url('https://assets.mycast.io/actor_images/actor-emily-until-dawn-721315_large.jpg?1680117225');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.card-front.blue-eyes {
-  background-image: url(https://pm1.narvii.com/6659/4edd96316186dcf6302da3098769e416d5119247_hq.jpg);
+.card-front.card-front.blue-EYES {
+  background-image: url('https://pm1.narvii.com/6659/4edd96316186dcf6302da3098769e416d5119247_hq.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .card-front.servant {
-  background-image: url(https://tse4.mm.bing.net/th/id/OIP.VHRn4hFCG5gOVzhbhygjHwHaJp?rs=1&pid=ImgDetMain&o=7&rm=3);
+  background-image: url('https://i.redd.it/8a8hwl6i9jxd1.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ }
+ .card-front.blue-eyes {
+  background-image: url('https://p2.trrsf.com.br/image/fget/cf/540/960/smart/images.terra.com/2024/02/02/card-6-until-dawn-u85on6yg3ebd.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ }
+ .card-front.SKULL {
+  background-image: url(https://ella.janitorai.com/bot-avatars/G3Vrk97DvJ3TY3i0G7VAn.webp?width=1200);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-/* Card name display */
+
+ /* Card name display */
 .card-name {
   position: absolute;
   bottom: -30px;
@@ -213,6 +226,10 @@ body::after {
 
 .white-particle {
   background-color: #ddd;
+}
+
+.green-particle {
+  background-color: green;
 }
 
 .card-container:hover .magic-particles {
@@ -266,6 +283,13 @@ body::after {
     0 0 75px rgba(200, 200, 200, 0.2);
 }
 
+/* Green glow */
+.card-container:hover .green-glow {
+  box-shadow: 
+    0 0 25px var(--green-glow),
+    0 0 50px rgba(0, 255, 21, 0.4),
+    0 0 75px rgba(12, 139, 0, 0.2);
+}
 /* Enhanced glow when activated */
 .card-container.activated .magic-glow {
   opacity: 1;
@@ -303,6 +327,13 @@ body::after {
     0 0 90px rgba(200, 200, 200, 0.3);
 }
 
+/* Green glow */
+.card-container:active .green-glow {
+  box-shadow: 
+    0 0 30px var(--green-glow),
+    0 0 60px rgba(0, 255, 21, 0.4),
+    0 0 90px rgba(12, 139, 0, 0.2);
+}
 @keyframes float {
   0%, 100% {
     transform: translateY(0);
@@ -359,3 +390,4 @@ body::after {
   0%, 100% { opacity: 0.7; }
   50% { opacity: 0.3; }
 }
+
